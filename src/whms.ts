@@ -3,7 +3,7 @@ import { readFileSync } from 'fs';
 import * as path from 'path';
 import { BaseConfigSchema, Employee, Project, UploadConfigSchema, WorkRecordConfig } from "./types/types";
 
-const file = readFileSync(path.join(process.cwd(), 'config', 'base.json'), { encoding: 'utf-8', flag: 'r+' });
+const file = readFileSync(path.join(__dirname, '..', 'config', 'base.json'), { encoding: 'utf-8', flag: 'r+' });
 const config: BaseConfigSchema = JSON.parse(file);
 
 // Create Whs instance
