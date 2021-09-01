@@ -1,0 +1,10 @@
+{
+    "method": "POST",
+    "headers": {
+        "Content-Type": "application/json"
+    },
+    "data": {},
+    "requestUrl": "http://192.168.8.188:8088/whms/ajax/",
+    "baseUrl": "http://192.168.8.188:8088/",
+    "projectUrl": "http://192.168.8.188:8088/whms/workhour/list/"
+}
