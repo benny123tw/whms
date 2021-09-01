@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
-import { BaseConfigSchema, WhsInstance, WhsRequestConfig, WorkRecord, WorkRecordConfig } from "../types/types";
-declare class Whs implements WhsInstance {
+import { BaseConfigSchema, WhmsInstance, WhsRequestConfig, WorkRecord, WorkRecordConfig } from "../types/types";
+declare class Whms implements WhmsInstance {
     private section;
     baseConfig: BaseConfigSchema;
     constructor(baseConfig: BaseConfigSchema);
@@ -40,4 +40,4 @@ declare class Whs implements WhsInstance {
      */
     generateWorkReocrd(workRecordConfig: WorkRecordConfig): WorkRecord[];
 }
-export { Whs };
+export { Whms };

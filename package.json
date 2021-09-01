@@ -1,8 +1,8 @@
 {
-  "name": "whs",
+  "name": "whms",
   "version": "1.0.0",
   "description": "",
-  "main": "lib/whs.js",
+  "main": "lib/whms.js",
   "types": "lib",
   "scripts": {
     "start": "ts-node ./index.ts"
