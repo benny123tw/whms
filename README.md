@@ -1,6 +1,6 @@
 # WHMS
 
-A package for testing npm publish.
+A package for simplify work hour management system get post process.
 
 ## Installing
 
