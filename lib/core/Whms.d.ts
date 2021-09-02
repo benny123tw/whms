@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { BaseConfigSchema, UploadConfigSchema, WhmsInstance, WhsRequestConfig, WorkRecord, WorkRecordConfig } from "../../types/types";
+import { BaseConfigSchema, UploadConfigSchema, WhmsInstance, WhsRequestConfig, WorkRecord, WorkRecordConfig } from "../../index";
 declare class Whms implements WhmsInstance {
     private section;
     baseConfig: BaseConfigSchema;

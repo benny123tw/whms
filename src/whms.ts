@@ -1,7 +1,7 @@
 import { Whms } from "./core/Whms";
 import { readFileSync } from 'fs';
 import * as path from 'path';
-import { BaseConfigSchema, Employee, Project, UploadConfigSchema, WorkRecordConfig } from "../types/types";
+import { BaseConfigSchema } from "../index";
 
 const file = readFileSync(path.join(__dirname, '..', 'config', 'base.json'), { encoding: 'utf-8', flag: 'r+' });
 const config: BaseConfigSchema = JSON.parse(file);

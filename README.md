@@ -25,9 +25,9 @@ const whms = require("whms").default;
 Upload Work Reocrd List to database
 
 ```ts
-import { upload } from "whms";
+import whms from "whms";
 
-upload({
+whms.upload({
   employeeAccount: "John Doe",
   projectCode: "C000",
   content: "This is a content",
@@ -80,9 +80,9 @@ whms.post({
 Generate Work Record List
 
 ```ts
-import whms from "whms";
+import whms, { Employee, WorkRecord } from "whms";
 
-const employee = {
+const employee: Employee = {
   id: 69,
   code: "",
   name: "John Doe",
@@ -94,14 +94,13 @@ const employee = {
   enabled: true,
 };
 
-const wrList = whms.generateWorkReocrd({
+const wrList: WorkRecord[] = whms.generateWorkReocrd({
   employee: employee, // employee object
   projectId: 10, // project index
   content: "This is a content.",
-  createDate: 0,
+  createDate: 0, // timestamp
 });
-
-console.log(wrList.length); // always return 22
+console.log(wrList.length); // print 22
 ```
 
 ## Upload Config
