@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { BaseConfigSchema, Employee, Project, UploadConfigSchema, WhmsInstance, WhsRequestConfig, WorkRecord, WorkRecordConfig } from "../../types/types";
+import { BaseConfigSchema, Employee, Project, UploadConfigSchema, WhmsInstance, WhsRequestConfig, WorkRecord, WorkRecordConfig } from "../../index";
 
 class Whms implements WhmsInstance {
     private section: string[] = [

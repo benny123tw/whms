@@ -26,7 +26,10 @@ export declare interface RequestEmployee {
 
 export declare interface GetWorkRecordData {
     workRecordEmployeeId: number;
-    workRecordCreateDate: number;
+    /**
+     * Timestamp
+     */
+    workRecordCreateDate: number; 
 }
 
 export declare interface PostWorkRecordData {
@@ -80,6 +83,10 @@ export declare interface Project {
 }
 
 export declare interface BaseConfigSchema {
+    /**
+     * http method from axios `Method`. 
+     * For more information please see [axios](https://axios-http.com/docs/intro).
+     */
     method: Method;
     headers: any;
     data: any;
@@ -89,22 +96,74 @@ export declare interface BaseConfigSchema {
 }
 
 export declare interface UploadConfigSchema {
+    /**
+     * **Notice**: `employeeAccount` is your account name not the user name.
+     */
     employeeAccount: string;
     projectCode: string;
     content: string;
+    /**
+     * Formate: "yyyy-MM-dd"
+     */
     dateStart: string;
     dateEnd: string;
     passHoliday: boolean;
+    /**
+     * Exclude date such as national vacations, leave, etc.
+     * Formate: "yyyy-MM-dd"
+     */
     exclude: string[];
 }
 
 export declare interface WhmsInstance {
+    /**
+     * Config settings for connecting to Work Hour Management System.
+     */
     baseConfig: BaseConfigSchema;
+    /**
+     * This method is not available for this instance. It will
+     * be deprecated in the future.
+     * 
+     * @deprecated
+     * @param path Path to the file.
+     * @param filename File name to save.
+     * @param data Data to save.
+     */    
     saveToLocal(path: string, filename: string, data: any): Promise<void>;
+    /**
+     * Get method for projects, employees and work records list.
+     * 
+     * @param {Object} config `WhsRequestConfig`
+     * @returns `AxiosResponse`. For more information please see [axios](https://axios-http.com/docs/intro).
+     */    
     get<T = any, R = AxiosResponse<T>>(config: WhsRequestConfig): Promise<R>;
+    /**
+     * Post Method for update value
+     * 
+     * @param config `WhsRequestConfig`
+     * @returns `AxiosResponse`. For more information please see [axios](https://axios-http.com/docs/intro).
+     */    
     post<T = any, R = AxiosResponse<T>>(config: WhsRequestConfig): Promise<R>;
-    save<T = any, R = AxiosResponse<T>>(orkRecordList: WorkRecord[]): Promise<R>;
-    generateWorkReocrd( workRecordConfig: WorkRecordConfig): WorkRecord[];
+    /**
+     * Save work record list to the database.
+     * 
+     * @param workRecordList `WorkRecord[]`
+     * @returns `AxiosResponse`. For more information please see [axios](https://axios-http.com/docs/intro).
+     */   
+    save<T = any, R = AxiosResponse<T>>(workRecordList: WorkRecord[]): Promise<R>;
+    /**
+     * Create and return work record list;
+     * 
+     * @param workRecordConfig `WorkRecordConfig`
+     * @returns `WorkRecord[]` 
+     */  
+    generateWorkReocrd(workRecordConfig: WorkRecordConfig): WorkRecord[];
+    /**
+     * Upload work record list to database.
+     * 
+     * @param uploadConfig `UploadConfigSchema`
+     * @returns `AxiosResponse`. For more information please see [axios](https://axios-http.com/docs/intro).
+     */ 
     upload(uploadConfig: UploadConfigSchema): Promise<void>;
 }
 
