@@ -85,6 +85,8 @@ class Whms implements WhmsInstance {
                 '-' + workRecordCreateDate.getDate();
 
             console.log(res.status == 200 ? `${dateString} uploaded.` : (`Failed: ${res.status} ${dateString} upload failed`));
+
+            return res;
         });
     }
 
