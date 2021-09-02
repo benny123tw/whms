@@ -105,6 +105,7 @@ export declare interface WhmsInstance {
     post<T = any, R = AxiosResponse<T>>(config: WhsRequestConfig): Promise<R>;
     save<T = any, R = AxiosResponse<T>>(orkRecordList: WorkRecord[]): Promise<R>;
     generateWorkReocrd( workRecordConfig: WorkRecordConfig): WorkRecord[];
+    upload(uploadConfig: UploadConfigSchema): Promise<void>;
 }
 
 declare const whms: WhmsInstance;

@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { BaseConfigSchema, WhmsInstance, WhsRequestConfig, WorkRecord, WorkRecordConfig } from "../types/types";
+import { BaseConfigSchema, Employee, Project, UploadConfigSchema, WhmsInstance, WhsRequestConfig, WorkRecord, WorkRecordConfig } from "../../types/types";
 
 class Whms implements WhmsInstance {
     private section: string[] = [
@@ -80,9 +80,9 @@ class Whms implements WhmsInstance {
 
             const workRecordCreateDate = new Date(createDate);
 
-            const dateString = workRecordCreateDate.getFullYear() + 
-                            '-' + (workRecordCreateDate.getMonth()+1) + 
-                            '-' + workRecordCreateDate.getDate();
+            const dateString = workRecordCreateDate.getFullYear() +
+                '-' + (workRecordCreateDate.getMonth() + 1) +
+                '-' + workRecordCreateDate.getDate();
 
             console.log(res.status == 200 ? `${dateString} uploaded.` : (`Failed: ${res.status} ${dateString} upload failed`));
         });
@@ -114,6 +114,61 @@ class Whms implements WhmsInstance {
             workRecordList.push(workRecord);
         }
         return workRecordList;
+    }
+
+    /**
+     * Upload work record list to database.
+     * 
+     * @param uploadConfig 
+     */
+    async upload(uploadConfig: UploadConfigSchema): Promise<void> {
+        return new Promise<any>(async (resolve, reject) => {
+            if (!uploadConfig.employeeAccount) return reject(`Failed: Empty employee name.`);
+
+            const eList: Employee[] = await this.get(
+                {
+                    method: 'getEmployees',
+                    data: {
+                        employeeShowDisabled: true,
+                    }
+                }
+            );
+            const pList: Project[] = await this.get(
+                {
+                    method: "getProjects",
+                    data: {}
+                }
+            );
+
+            const employee = eList.find((e: Employee) => e.account === uploadConfig.employeeAccount);
+            const projectId: string | number = pList.find((p: Project) => p.code === uploadConfig.projectCode)?.id || '';
+
+            if (!employee) {
+                return reject(`Can't find a match.`);
+            }
+
+            const workRecordConfig: WorkRecordConfig = {
+                employee: employee,
+                projectId: projectId,
+                content: uploadConfig.content,
+                createDate: 0
+            }
+
+            const dStart = new Date(uploadConfig.dateStart);
+            const dEnd = new Date(uploadConfig.dateEnd);
+
+            const days = (dEnd.getTime() - dStart.getTime()) / (1000 * 60 * 60 * 24);
+
+            for (let i = 0; i <= days; i++) {
+                const currentDate = new Date(dStart);
+                dStart.setDate(dStart.getDate() + 1);
+                if (uploadConfig.exclude.includes(currentDate.toString())) continue;
+                if (uploadConfig.passHoliday && (currentDate.getDay() == 0 || currentDate.getDay() == 6)) continue;
+
+                workRecordConfig.createDate = currentDate.getTime();
+                this.save(this.generateWorkReocrd(workRecordConfig));
+            }
+        })
     }
 }
 

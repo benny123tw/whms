@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { BaseConfigSchema, WhmsInstance, WhsRequestConfig, WorkRecord, WorkRecordConfig } from "../types/types";
+import { BaseConfigSchema, UploadConfigSchema, WhmsInstance, WhsRequestConfig, WorkRecord, WorkRecordConfig } from "../../types/types";
 declare class Whms implements WhmsInstance {
     private section;
     baseConfig: BaseConfigSchema;
@@ -39,5 +39,11 @@ declare class Whms implements WhmsInstance {
      * @returns WorkRecord[]
      */
     generateWorkReocrd(workRecordConfig: WorkRecordConfig): WorkRecord[];
+    /**
+     * Upload work record list to database.
+     *
+     * @param uploadConfig
+     */
+    upload(uploadConfig: UploadConfigSchema): Promise<void>;
 }
 export { Whms };
