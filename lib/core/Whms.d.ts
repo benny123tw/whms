@@ -31,7 +31,7 @@ declare class Whms implements WhmsInstance {
      * @param workRecordList WorkRecord[]
      * @returns
      */
-    save<T = any, R = AxiosResponse<T>>(workRecordList: WorkRecord[]): Promise<R>;
+    save<T = any, R = AxiosResponse<T>>(workRecordList: WorkRecord[]): Promise<any>;
     /**
      * Create and return work record list;
      *
