@@ -49,6 +49,20 @@ whms.get({
 });
 
 whms.get({
+  method: "getAvalibleProjects",
+  data: {}
+});
+
+whms.get({
+  method: "getProjectsByCondition",
+  data: {
+    projectCodeSearch: "",
+    projectNameSearch: "",
+    projectShowAll: false
+  }
+});
+
+whms.get({
   method: "getWorkRecord",
   data: {
     workRecordEmployeeId: 69;
@@ -62,6 +76,15 @@ whms.get({
     employeeShowDisabled: true
   }
 });
+
+whms.get({
+  method: "getEmployeesByCondition"
+  data: {
+    employeeIdSearch: "",
+    employeeNameSearch: ""
+  }
+});
+
 ```
 
 Post data to work hour management system
