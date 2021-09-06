@@ -65,8 +65,8 @@ whms.get({
 whms.get({
   method: "getWorkRecord",
   data: {
-    workRecordEmployeeId: 69;
-    workRecordCreateDate: new Date().getTime(); // only accept timestamp
+    workRecordEmployeeId: 69,
+    workRecordCreateDate: new Date().getTime() // only accept timestamp
   }
 });
 
