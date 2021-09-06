@@ -35,6 +35,8 @@ whms.upload({
   dateEnd: "2021-09-08",
   passHoliday: true,
   exclude: ["2021-09-07"],
+}).then((response) => {
+  console.log(response);
 });
 ```
 
@@ -65,8 +67,8 @@ whms.get({
 whms.get({
   method: "getWorkRecord",
   data: {
-    workRecordEmployeeId: 69;
-    workRecordCreateDate: new Date().getTime(); // only accept timestamp
+    workRecordEmployeeId: 69,
+    workRecordCreateDate: new Date().getTime() // only accept timestamp
   }
 });
 
