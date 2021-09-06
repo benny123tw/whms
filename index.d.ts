@@ -112,6 +112,11 @@ export declare interface Project {
     tel: string;
 }
 
+export declare interface UploadResponse {
+    item: string,
+    response: AxiosResponse
+}
+
 export declare interface BaseConfigSchema {
     /**
      * http method from axios `Method`. 
@@ -194,7 +199,7 @@ export declare interface WhmsInstance {
      * @param uploadConfig `UploadConfigSchema`
      * @returns `AxiosResponse`. For more information please see [axios](https://axios-http.com/docs/intro).
      */
-    upload(uploadConfig: UploadConfigSchema): Promise<void>;
+    upload(uploadConfig: UploadConfigSchema): Promise<UploadResponse[]>;
 }
 
 declare const whms: WhmsInstance;

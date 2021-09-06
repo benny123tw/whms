@@ -1,13 +1,15 @@
 {
   "name": "whms",
-  "version": "1.0.4",
-  "description": "",
+  "version": "1.0.5",
+  "description": "A package simplfy WHMS upload process",
   "main": "index.js",
   "types": "lib",
   "scripts": {
     "start": "ts-node ./index.ts"
   },
-  "keywords": [],
+  "keywords": [
+    "whms"
+  ],
   "author": "benny123tw",
   "license": "MIT",
   "files": [

@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { BaseConfigSchema, UploadConfigSchema, WhmsInstance, WhsRequestConfig, WorkRecord, WorkRecordConfig } from "../../index";
+import { BaseConfigSchema, UploadConfigSchema, UploadResponse, WhmsInstance, WhsRequestConfig, WorkRecord, WorkRecordConfig } from "../../index";
 declare class Whms implements WhmsInstance {
     private section;
     baseConfig: BaseConfigSchema;
@@ -44,6 +44,6 @@ declare class Whms implements WhmsInstance {
      *
      * @param uploadConfig
      */
-    upload(uploadConfig: UploadConfigSchema): Promise<void>;
+    upload(uploadConfig: UploadConfigSchema): Promise<UploadResponse[]>;
 }
 export { Whms };

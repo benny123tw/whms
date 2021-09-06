@@ -6,7 +6,7 @@ declare const whms: Whms;
  *
  * @param uploadConfig
  */
-declare const upload: (uploadConfig: import("../index").UploadConfigSchema) => Promise<void>;
+declare const upload: (uploadConfig: import("../index").UploadConfigSchema) => Promise<import("../index").UploadResponse[]>;
 declare const baseConfig: BaseConfigSchema;
 export default whms;
 export { baseConfig, upload };
