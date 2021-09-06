@@ -1,10 +1,16 @@
 import { Whms } from "./core/Whms";
-import { readFileSync } from 'fs';
-import * as path from 'path';
 import { BaseConfigSchema } from "../index";
 
-const file = readFileSync(path.join(__dirname, '..', 'config', 'base.json'), { encoding: 'utf-8', flag: 'r+' });
-const config: BaseConfigSchema = JSON.parse(file);
+const config: BaseConfigSchema = {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    data: {},
+    requestUrl: "http://192.168.8.188:8088/whms/ajax/",
+    baseUrl: "http://192.168.8.188:8088/",
+    projectUrl: "http://192.168.8.188:8088/whms/workhour/list/"
+}
 
 // Create Whs instance
 const whms = new Whms(config);
