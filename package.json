@@ -1,5 +1,5 @@
 {
-  "name": "@benny123tw/whms",
+  "name": "whms",
   "version": "1.0.7",
   "description": "A package simplfy WHMS upload process",
   "main": "index.js",
