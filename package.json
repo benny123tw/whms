@@ -1,14 +1,20 @@
 {
   "name": "whms",
-  "version": "1.0.6a",
+  "version": "1.0.7",
   "description": "A package simplfy WHMS upload process",
   "main": "index.js",
   "types": "lib",
   "scripts": {
     "start": "ts-node ./index.ts"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benny123tw/whms.git"
+  },
+  "homepage": "https://github.com/benny123tw/whms#readme",
   "keywords": [
-    "whms"
+    "whms",
+    "node"
   ],
   "author": "benny123tw",
   "license": "MIT",
