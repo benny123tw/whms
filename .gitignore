@@ -7,3 +7,5 @@ lib
 
 # testing files
 test.js
+
+package-lock.json
