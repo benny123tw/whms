@@ -2,7 +2,6 @@
 src
 config
 
-.npmignore
 .gitignore
 
 node_modules

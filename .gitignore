@@ -1,4 +1,9 @@
+# folders
 node_modules
-test.js
-
 config
+
+# ignore javascript
+lib
+
+# testing files
+test.js
