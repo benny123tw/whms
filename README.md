@@ -1,5 +1,8 @@
 # WHMS
 
+[![npm version](https://img.shields.io/npm/v/whms.svg?style=flat-square)](https://www.npmjs.org/package/whms)
+[![license](https://img.shields.io/github/license/benny123tw/whms)](https://github.com/benny123tw/whms/blob/master/LICENSE)
+
 A package for simplify work hour management system get post process.
 
 ## Installing
