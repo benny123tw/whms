@@ -7,5 +7,6 @@ lib
 
 # testing files
 test.js
+test.ts
 
 package-lock.json

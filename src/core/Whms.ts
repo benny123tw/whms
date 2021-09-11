@@ -3,11 +3,8 @@ import { BaseConfigSchema, Employee, Project, UploadConfigSchema, UploadResponse
 
 class Whms implements WhmsInstance {
     private section: string[] = [
-        "00:00~01:00", "01:00~02:00", "02:00~03:00", "03:00~04:00", "04:00~05:00",
-        "05:00~06:00", "06:00~07:00", "07:00~08:00", "08:00~09:00", "09:00~10:00",
-        "10:00~11:00", "11:00~12:00", "13:30~14:30", "14:30~15:30",
-        "15:30~16:30", "16:30~17:30", "17:30~18:30", "19:00~20:00",
-        "20:00~21:00", "21:00~22:00", "22:00~23:00", "23:00~24:00"
+        "09:00~10:00", "10:00~11:00", "11:00~12:00", "13:30~14:30", 
+        "14:30~15:30", "15:30~16:30", "16:30~17:30", "17:30~18:30"
     ]
 
     baseConfig: BaseConfigSchema;
@@ -65,8 +62,8 @@ class Whms implements WhmsInstance {
     public async save<T = any, R = AxiosResponse<T>>(workRecordList: WorkRecord[]): Promise<any> {
         return new Promise(async (resolve, reject) => {
 
-            if (workRecordList.length !== 22)
-                return reject(`Wrong list length: ${workRecordList.length}. It should be 22.`);
+            if (workRecordList.length !== 8)
+                return reject(`Wrong list length: ${workRecordList.length}. It should be 8.`);
 
             return resolve(await this.post(
                 {
@@ -86,7 +83,7 @@ class Whms implements WhmsInstance {
      * @returns WorkRecord[] 
      */
     public generateWorkReocrd(workRecordConfig: WorkRecordConfig): WorkRecord[] {
-        let serial = 1;
+        let serial = 10;
         const workRecordList: WorkRecord[] = [];
 
         for (let i = 0; i < this.section.length; i++) {
@@ -95,13 +92,11 @@ class Whms implements WhmsInstance {
                 createDate: workRecordConfig.createDate,
                 serial: serial++,
                 section: this.section[i],
-                projectId: 0,
+                projectId: '',
                 content: '',
             }
-            if (i <= 16 && i >= 9) {
-                workRecord.projectId = workRecordConfig.projectId;
-                workRecord.content = workRecordConfig.content;
-            }
+            workRecord.projectId = workRecordConfig.projectId;
+            workRecord.content = workRecordConfig.content;
             workRecordList.push(workRecord);
         }
         return workRecordList;
@@ -147,7 +142,7 @@ class Whms implements WhmsInstance {
 
             const dStart = new Date(uploadConfig.dateStart);
             const dEnd = new Date(uploadConfig.dateEnd);
-            const days = (dEnd.getTime() - dStart.getTime()) / (1000 * 60 * 60 * 24);
+            const days = (dEnd.getTime() - dStart.getTime()) / (1000 * 60 * 60 * 24) + 1;
             const dateArr: Date[] = [];
             for (let i = 0; i < days; i++) {
                 const curDate = new Date(dStart);
@@ -165,7 +160,7 @@ class Whms implements WhmsInstance {
                 pendArr.push(this.save(this.generateWorkReocrd(workRecordConfig)));
                 itemNameArr.push(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`);
             }
-            
+
             const resArr: AxiosResponse[] = await Promise.all(pendArr);
             return resolve(resArr.map((res, idx) => {
                 return {
