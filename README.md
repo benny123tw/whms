@@ -100,7 +100,7 @@ import whms from "whms";
 whms.post({
   method: "addWorkRecord",
   data: {
-    workRecordList: [], // Array<WorkRecord> length should be 22
+    workRecordList: [], // Array<WorkRecord> length should be 8
   },
 });
 ```
@@ -128,7 +128,7 @@ const wrList: WorkRecord[] = whms.generateWorkReocrd({
   content: "This is a content.",
   createDate: 0, // timestamp
 });
-console.log(wrList.length); // print 22
+console.log(wrList.length); // print 8
 ```
 
 ## Upload Config
