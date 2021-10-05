@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/whms.svg?style=flat-square)](https://www.npmjs.org/package/whms)
 [![license](https://img.shields.io/github/license/benny123tw/whms)](https://github.com/benny123tw/whms/blob/master/LICENSE)
 
-A package for simplify work hour management system get post process.
+A package that simplifies the work hour management system (get/post) process.
 
 ## Installing
 
@@ -71,7 +71,7 @@ whms.get({
   method: "getWorkRecord",
   data: {
     workRecordEmployeeId: 69,
-    workRecordCreateDate: new Date().getTime() // only accept timestamp
+    workRecordCreateDate: new Date().getTime() // Unix time
   }
 });
 
@@ -126,7 +126,7 @@ const wrList: WorkRecord[] = whms.generateWorkReocrd({
   employee: employee, // employee object
   projectId: 10, // project index
   content: "This is a content.",
-  createDate: 0, // timestamp
+  createDate: 0, // unix time
 });
 console.log(wrList.length); // print 8
 ```
@@ -141,7 +141,7 @@ console.log(wrList.length); // print 8
   projectCode: "C000",
   content: "This is a content",
 
-  // date format: "yyyy-MM-dd"
+  // date format: "yyyy-MM-dd" or "yyyy/MM/dd"
   dateStart: "2021-09-06",
   dateEnd: "2021-09-08",
   passHoliday: true,

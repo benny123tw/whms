@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { BaseConfigSchema, Employee, Project, UploadConfigSchema, UploadResponse, WhmsInstance, WhsRequestConfig, WorkRecord, WorkRecordConfig } from "../../index";
+import * as moment from 'moment';
 
 class Whms implements WhmsInstance {
     private section: string[] = [
@@ -8,9 +9,13 @@ class Whms implements WhmsInstance {
     ]
 
     baseConfig: BaseConfigSchema;
+    format: string;
+    formatArr: Array<string>;
 
     constructor(baseConfig: BaseConfigSchema) {
         this.baseConfig = baseConfig;
+        this.format = "YYYY/MM/DD";
+        this.formatArr = [this.format, "YYYY-MM-DD"];
     }
 
     /**
@@ -140,25 +145,25 @@ class Whms implements WhmsInstance {
                 createDate: 0
             }
 
-            const dStart = new Date(uploadConfig.dateStart);
-            const dEnd = new Date(uploadConfig.dateEnd);
-            const days = (dEnd.getTime() - dStart.getTime()) / (1000 * 60 * 60 * 24) + 1;
-            const dateArr: Date[] = [];
+            const dStart = moment(uploadConfig.dateStart, this.formatArr);
+            const dEnd = moment(uploadConfig.dateEnd, this.formatArr);
+            const days = dEnd.diff(dStart, 'days') + 1; // include first date
+            const dateArr: moment.Moment[] = [];
             for (let i = 0; i < days; i++) {
-                const curDate = new Date(dStart);
-                curDate.setDate(curDate.getDate() + i);
+                const curDate = moment(dStart);
+                curDate.add(i, 'days');
                 dateArr.push(curDate);
             }
 
             const pendArr = [];
             const itemNameArr: string[] = [];
             for (let date of dateArr) {
-                if (uploadConfig.exclude.includes(date.toString())) continue;
-                if (uploadConfig.passHoliday && (date.getDay() == 0 || date.getDay() == 6)) continue;
+                if (uploadConfig.exclude.some(eDate => moment(eDate, this.formatArr).diff(date) == 0)) continue;
+                if (uploadConfig.passHoliday && (date.isoWeekday() > 5)) continue;
 
-                workRecordConfig.createDate = date.getTime();
+                workRecordConfig.createDate = date.valueOf();
                 pendArr.push(this.save(this.generateWorkReocrd(workRecordConfig)));
-                itemNameArr.push(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`);
+                itemNameArr.push(date.format(this.format));
             }
 
             const resArr: AxiosResponse[] = await Promise.all(pendArr);
