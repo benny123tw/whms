@@ -132,6 +132,11 @@ export declare interface BaseConfigSchema {
 
 export declare interface UploadConfigSchema {
     /**
+     * employee id  
+     * **added on 11/25** for someone doesn't have an account
+     */
+    id: string | number;
+    /**
      * **Notice**: `employeeAccount` is your account name not the user name.
      */
     employeeAccount: string;

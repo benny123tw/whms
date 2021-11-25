@@ -4,7 +4,7 @@ import * as moment from 'moment';
 
 class Whms implements WhmsInstance {
     private section: string[] = [
-        "09:00~10:00", "10:00~11:00", "11:00~12:00", "13:30~14:30", 
+        "09:00~10:00", "10:00~11:00", "11:00~12:00", "13:30~14:30",
         "14:30~15:30", "15:30~16:30", "16:30~17:30", "17:30~18:30"
     ]
 
@@ -123,7 +123,7 @@ class Whms implements WhmsInstance {
                         employeeShowDisabled: true,
                     }
                 }
-            );
+            ); 
             const pList: Project[] = await this.get(
                 {
                     method: "getProjects",
@@ -131,7 +131,7 @@ class Whms implements WhmsInstance {
                 }
             );
 
-            const employee = eList.find((e: Employee) => e.account === uploadConfig.employeeAccount);
+            const employee = eList.find((e: Employee) => e.id === uploadConfig.id || e.account === uploadConfig.employeeAccount);
             const projectId: string | number = pList.find((p: Project) => p.code === uploadConfig.projectCode)?.id || '';
 
             if (!employee) {
