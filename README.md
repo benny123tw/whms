@@ -31,6 +31,7 @@ Upload Work Reocrd List to database
 import whms from "whms";
 
 whms.upload({
+  id: 69,
   employeeAccount: "John Doe",
   projectCode: "C000",
   content: "This is a content",
