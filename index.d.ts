@@ -139,7 +139,7 @@ export declare interface UploadConfigSchema {
     /**
      * **Notice**: `employeeAccount` is your account name not the user name.
      */
-    employeeAccount: string;
+    employeeAccount?: string;
     projectCode: string;
     content: string;
     /**

@@ -114,7 +114,7 @@ class Whms implements WhmsInstance {
      */
     async upload(uploadConfig: UploadConfigSchema): Promise<UploadResponse[]> {
         return new Promise<UploadResponse[]>(async (resolve, reject) => {
-            if (!uploadConfig.employeeAccount) return reject(`Failed: Empty employee name.`);
+            if (!uploadConfig.id && !uploadConfig.employeeAccount) return reject(`Failed: Empty employee name and id.`);
 
             const eList: Employee[] = await this.get(
                 {

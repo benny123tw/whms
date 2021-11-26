@@ -5,6 +5,11 @@
 
 A package that simplifies the work hour management system (get/post) process.
 
+## new
+
+1. add `id` to `UploadConfig`.
+2. fix `upload` function error handling
+
 ## Installing
 
 Using npm:
@@ -136,9 +141,8 @@ console.log(wrList.length); // print 8
 
 ```js
 {
-  // `employeeAccount` is account name not user name
-  // provide account name to upload method will automatically search employees list and return match employee
-  employeeAccount: "johndoe",
+  id: 69,
+  employeeAccount: "johndoe", // [optional] `employeeaccount` is your account not usernmae
   projectCode: "C000",
   content: "This is a content",
 
